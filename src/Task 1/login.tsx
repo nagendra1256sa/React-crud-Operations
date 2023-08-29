@@ -45,7 +45,7 @@ const Login = () => {
         {
             if(!isPasswordValid())
             {
-              console.log("passWord is not valid");
+              setSubmit(true);
               return;
             }
             navigate("/list")
@@ -65,8 +65,8 @@ const Login = () => {
                 value={password}
                 placeholder="Enter Password"
                 onChange={handleLoginP} />
-            {submit && password===""&& <span className='error-message'>Please Enter password</span>}
-            {submit && !isPasswordValid() &&(<span className='error-message'>Password must be a digit, special character, and letter.</span>)}
+            {submit && password==="" ? <span className='error-message'>Please Enter password</span>:
+             submit && !isPasswordValid() &&(<span className='error-message'>Password must be a digit, special character, and letter.</span>)}
             <br />
             <button className='login-button' onClick={handleValid}>Login</button>
         </div>

@@ -14,9 +14,9 @@ export const post=async(data:any)=>
         }
     })
 }
-export const deleteDetails=async(id:any)=>
+export const deleteDetails=async(Sku:number)=>
 {
-     return await axios.delete(`${url}/${id}`);
+     return await axios.delete(`${url}/${Sku}`);
 }
 export const putData=async(data:any,id:any)=>
 {

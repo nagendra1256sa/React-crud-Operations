@@ -21,16 +21,23 @@ const Add: React.FC<dataTypes> = (props) => {
     const { name, value } = e.target;
     setItem({ ...Item, [name]: value })
   }
+  const isValidString=(Name:string):boolean=>
+  {
+    const pattern = /^[A-Za-z][A-Za-z\s]*$/;
+
+    return pattern.test(Name);
+  }
   return (<section>
     <form className='Add-form'>
-      <h3>Add Contact</h3>
+      <h3>Add Item</h3>
       <div className='form-details'>
         <div className='form-group mt-2'>
           <label>Sku:</label>
           <input className="form-control mt-2" type="number" name="Sku" value={Item.Sku}
             onChange={storeData} placeholder='Enter Sku' />
           {
-            submitted && Item.Sku === "" && <span className='text-danger'>Sku required</span>
+            submitted && Item.Sku === ""  ? (<span className='text-danger'>Sku required</span>):
+             (parseInt(Item.Sku)<=0 && <span className='text-danger'>Invalid Inputs</span>)
           }
         </div>
         <div className='form-group mt-2'>
@@ -38,7 +45,8 @@ const Add: React.FC<dataTypes> = (props) => {
           <input className='form-control mt-2' type="text" name="Name" value={Item.Name}
             onChange={storeData} placeholder='Enter Name' />
           {
-            submitted && Item.Name === "" && <span className='text-danger'>Name required</span>
+            submitted && Item.Name === "" ?(<span className='text-danger'>Name required</span>):
+            (Item.Name.length>0 && !isValidString(Item.Name) && <span className='text-danger'>Invalid input</span>)
           }
         </div>
         <div className='form-group mt-2'>
@@ -46,29 +54,35 @@ const Add: React.FC<dataTypes> = (props) => {
           <input className='form-control mt-2' type="text" name="DisplayName" value={Item.DisplayName}
             onChange={storeData} placeholder='Enter Display Name' />
           {
-            submitted && Item.DisplayName === "" && <span className='text-danger'>Name required</span>
+            submitted && Item.DisplayName === "" ? <span className='text-danger'>Display Name required</span>:
+             Item.DisplayName.length>0 && !isValidString(Item.DisplayName) && <span className='text-danger'>Invalid Input</span>
           }
         </div>
         <div className='form-group mt-2'>
           <label>Base Price:</label>
-          <input className='form-control mt-2' type="text" name="BasePrice" value={Item.BasePrice}
+          <input className='form-control mt-2' type="number" name="BasePrice" value={Item.BasePrice}
             onChange={storeData} placeholder='Enter Base Price' />
           {
-            submitted && Item.BasePrice === "" && <span className='text-danger'>Base Price required</span>
+            submitted && Item.BasePrice === "" ? <span className='text-danger'>Base Price required</span>:
+            parseInt(Item.BasePrice)<=0 && <span className='text-danger'>Invalid Inputs</span>
           }
         </div>
         <div className='form-group mt-2'>
           <label>Selling Price:</label>
-          <input className='form-control mt-2' type="number" name="SellingPrice" value={Item.SellingPrice}
+          <input className='form-control mt-2' type="number" name="SellingPrice" value={Item.SellingPrice    }
             onChange={storeData} placeholder='Enter Selling Price' />
           {
-            submitted && Item.SellingPrice === "" && <span className='text-danger'>Selling Price required</span>
+            submitted && Item.SellingPrice === "" ? <span className='text-danger'>Selling Price required</span>:
+            parseInt(Item.SellingPrice)<=0 && <span className='text-danger'>Invalid Inputs</span>
           }
         </div>
         <div className='form-group mt-2'>
           <label>Decription:</label>
           <input className='form-control mt-2' type="text" name="Decription" value={Item.Decription}
             onChange={storeData} placeholder='Enter Decription' />
+            {
+              Item.Decription.charAt(0)===" "&&<span className='text-danger'>Invalid Input</span>
+            }
         </div>
         <button className='btn btn-primary float-end' onClick={(e) => {
           e.preventDefault()
@@ -79,29 +93,6 @@ const Add: React.FC<dataTypes> = (props) => {
         <button className='btn btn-danger float-end' style={{ marginRight: "6px" }} onClick={() => navigate("/list")}>Close</button>
       </div>
     </form>
-    {/* <div className='form-popup-container'>
-        <div className='form-popup'>
-          <h2>Add Item</h2>
-          <form>
-            <label>Sku:</label>
-            <input type='text' name='name' />
-            <label>Name:</label>
-            <input type='text' name='name' />
-            <label>Display Name:</label>
-            <input type='text' name='displayName' />
-
-            <label>Description:</label>
-            <textarea name='description'></textarea><br/>
-
-            <label>Base Price:</label>
-            <input type='number' name='basePrice' />
-
-            <label>Selling Price:</label>
-            <input type='number' name='sellingPrice'/>
-            <button type='submit'>Submit</button>
-          </form>
-        </div>
-    </div> */}
   </section>)
 }
 export default Add;

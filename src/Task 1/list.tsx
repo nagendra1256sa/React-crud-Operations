@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Annotation } from '../App';
+import '../App.css'
+// import RowDetails from './RowDetails'
 
 interface Properties
 {
@@ -11,15 +13,31 @@ interface Properties
 
 const List:React.FC<Properties>=({props,deleteItem,editing})=>
 {
-    return(<div>
-         <table className='table m-3'>
+    const navigate=useNavigate();
+    const handleEditing=(item:Annotation,e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>
+    {
+        editing(item);
+        navigate('/list/edit');
+        e.stopPropagation();
+    }
+    const handleDeleteItem=(Sku:number,e:React.MouseEvent<HTMLButtonElement,MouseEvent>)=>
+    {
+        deleteItem(Sku);
+        e.stopPropagation();
+    }
+    const itemDetails=(Sku:number)=>
+    {
+        navigate(`/list/listcard/${Sku}`);
+    }
+    return(<div className='table-container'>
+         <table className='table'>
         <thead>
             <tr>
                 <th>
                     Sku
                 </th>
                 <th>Name</th>
-                <th>BasePrice</th>
+                <th>SellingPrice</th>
 
             </tr>
         </thead>
@@ -27,15 +45,14 @@ const List:React.FC<Properties>=({props,deleteItem,editing})=>
         
                 {props.map((each)=>
                 {
-                    const{Sku,Name,BasePrice}=each;
+                    const{Sku,Name,SellingPrice}=each;
                     return(
-                    <tr key={Sku}>
-                        <td>{Sku}</td>
-                        <td>{Name}</td>
-                        <td>{BasePrice}</td>
-                        <td> <Link to="/list/edit"><button className="btn btn-primary"onClick={()=>editing(each)}>Edit</button></Link></td>
-                        <td><button  className='btn btn-danger' onClick={()=>deleteItem(Sku)}>Delete</button></td>
-                        <td><Link to={`/list/listcard/${Sku}`}><button className='btn btn-info'>Details</button></Link></td>
+                    <tr key={Sku} onClick={()=>itemDetails(Sku)}>
+                          <td>{Sku}</td>
+                            <td>{Name}</td>
+                            <td>{SellingPrice}</td> 
+                        <td> <button className="btn btn-primary"onClick={(e)=>handleEditing(each,e)}>Edit</button></td>
+                        <td><button  className='btn btn-danger' onClick={(e)=>handleDeleteItem(each.id,e)}>Delete</button></td>
                     </tr>)
                 })}
             

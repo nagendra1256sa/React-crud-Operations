@@ -67,6 +67,25 @@ input {
    width:500px;
    /* height:calc(100vh - 60px); */
 }
+.text-decoration
+{
+  display: table-row;
+  cursor: pointer;
+  text-decoration: none;
+  
+}
+.text-decoration:hover{
+ 
+    background-color: #f0f0f0;
+}
+.table-container {
+  width: 69%; 
+  margin-left: 15%;
+}
+
+.table {
+  width: 100%;
+}
 /* .form-popup-container {
   text-align: center;
   margin-top: 5px;

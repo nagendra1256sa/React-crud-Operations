@@ -9,6 +9,7 @@ import { deleteDetails, getData, post, putData } from './Task 1/Storage';
 
 export interface Annotation
 {
+   id:number
   Sku:number;
   Name:string;
   DisplayName:string;
@@ -44,7 +45,7 @@ const App:React.FC=()=>
     getDetails();
     navigate("/list")
  }
- const deleteData=async(id:any)=>
+ const deleteData=async(id:number)=>
  {
     await deleteDetails(id);
     getDetails();
@@ -61,7 +62,7 @@ const App:React.FC=()=>
  }
   return (
     <div>
-       <h1 className='text-primary fixed'>Menu Items</h1>
+       <h1 className='text-primary fixed'style={{"textAlign":"center"}}>Menu Items</h1>
      <Routes>
       <Route path="/" element={<Login/>}/>
       <Route path="/list" element={state?<List props={state} deleteItem={deleteData} editing={handleData}/>:null}>

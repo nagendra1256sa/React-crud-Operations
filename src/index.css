@@ -19,7 +19,7 @@ code {
   display: flex;
   width: 300px;
   position: fixed;
-  margin-left: 600px;
+  margin-left: 450px;
   margin-top: 5px;
   transform: translate(-50%, -50%);
   z-index: 999;

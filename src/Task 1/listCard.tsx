@@ -10,7 +10,7 @@ const ListCard:React.FC<itemType>=({item})=>
 {
   const navigate=useNavigate();
     const {Sku}=useParams();
-    const userid=Sku? Sku:NaN;
+    const userid=Sku? parseInt(Sku):NaN;
     console.log(userid);
     console.log(item);
     const Item=item.find((each)=>{return each.Sku===userid})

@@ -18,8 +18,11 @@ const Add: React.FC<dataTypes> = (props) => {
   const [submitted, setSubmit] = useState(false);
   const navigate = useNavigate();
   const storeData = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    
     const { name, value } = e.target;
-    setItem({ ...Item, [name]: value })
+    const parsedValue = name==='Sku'||name==='BasePrice'||name==='SellingPrice'?parseFloat(value):value;
+    setItem({ ...Item, [name]: parsedValue })
   }
   const isValidString=(Name:string):boolean=>
   {

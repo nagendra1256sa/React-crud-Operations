@@ -56,7 +56,7 @@ const App:React.FC=()=>
  }
  const updateData=async(data:any)=>
  {
-    await putData(data,data.Sku);
+    await putData(data,data.id);
     getDetails();
     navigate("/list");
  }
@@ -72,6 +72,7 @@ const App:React.FC=()=>
       </Route>
       </Routes>
     </div>
+    
   );
 }
 export default App;

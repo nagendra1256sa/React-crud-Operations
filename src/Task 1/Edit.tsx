@@ -14,7 +14,9 @@ const Edit:React.FC<EditTypes>=({update,editData})=>
     const updateDetails=(e:ChangeEvent<HTMLInputElement>)=>
    {
      const{name,value}=e.target;
-     setEditStorage({...editStorage,[name]:value});
+     const parsedValue = name === 'Sku' || name === 'BasePrice' || name === 'SellingPrice' ? parseFloat(value) : value;
+     console.log(typeof parsedValue);
+     setEditStorage({...editStorage,[name]:parsedValue});
    }
    const isValid=(Name:string):boolean=>
    {
